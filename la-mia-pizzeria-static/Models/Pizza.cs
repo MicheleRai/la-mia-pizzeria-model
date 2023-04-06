@@ -2,16 +2,10 @@
 {
     public class Pizza
     {
-        public Pizza(string name, string description, string foto, double prezzo)
-        {
-            Name = name;
-            Description = description;
-            Foto = foto;
-            Prezzo = prezzo;
-        }
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public string Foto { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; } = string.Empty;
+        public string Description { get; set; } = string.Empty;
+        public string Foto { get; set; } = string.Empty;
         public double Prezzo { get; set; }
     }
 }

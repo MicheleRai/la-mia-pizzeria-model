@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Razor.Models;
+﻿using la_mia_pizzeria_static.Models;
+using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
-namespace Razor.Controllers
+namespace la_mia_pizzeria_static.Controllers
 {
     public class PizzaController : Controller
     {
@@ -15,12 +15,23 @@ namespace Razor.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            using var ctx = new PizzeriaContext();
+            var pizze = ctx.Pizze.ToArray();
+
+            return View(pizze);
         }
 
-        public IActionResult Privacy()
+        public IActionResult Dettagli(int id)
         {
-            return View();
+            using var ctx = new PizzeriaContext();
+            var pizza = ctx.Pizze.SingleOrDefault(p => p.Id == id);
+
+            if (pizza is null)
+            {
+                return NotFound($"Pizza with id {id} not found.");
+            }
+
+            return View(pizza);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
